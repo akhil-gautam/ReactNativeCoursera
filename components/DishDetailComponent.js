@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, 
   ScrollView, FlatList } from 'react-native';
-import { Card, Icon } from 'react-native-elements';
+import { Card, Icon, Rating } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavourite } from '../redux/ActionCreator';
@@ -50,8 +50,15 @@ const RenderComments = (props) => {
     return(
       <View key={index} style={{margin: 10}}>
         <Text style={{fontSize: 12}}>{item.comment}</Text>
-        <Text style={{fontSize: 14}}>{item.rating} Stars</Text>
-        <Text style={{fontSize: 10}}>{`--${item.author}, ${item.date}`}</Text>
+        <Rating
+          startingValue={item.rating}
+          readonly
+          imageSize={10}
+          style={{ 
+            display: 'flex', flex: 1, flexDirection: 'row',
+            justifyContent: 'flex-start', padding: 5}} 
+        />
+        <Text style={{fontSize: 10}}>{`--${item.author}, ${new Date(item.date).toLocaleDateString('en-us')}`}</Text>
       </View>
     )
   }
