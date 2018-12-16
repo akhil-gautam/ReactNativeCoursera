@@ -27,6 +27,12 @@ export const commentsFailed = (errmess) => ({
     payload: errmess
 });
 
+export const postComment = (comments)  => (dispatch) => {
+  setTimeout(() => {
+    dispatch(addComments(comments));
+  }, 1000);
+};
+
 export const addComments = (comments) => ({
     type: ActionTypes.ADD_COMMENTS,
     payload: comments

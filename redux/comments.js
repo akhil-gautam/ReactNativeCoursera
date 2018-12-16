@@ -6,7 +6,7 @@ export const comments = (state = {
   }, action) => {
     switch(action.type) {
       case ActionTypes.ADD_COMMENTS:
-        return {...state, errMsg: null, comments: action.payload};
+        return {...state, errMsg: null, comments: state.comments.concat(action.payload)};
       case ActionTypes.COMMENTS_FAILED:
         return { ...state, errMsg: null, comments: []};
       default: 
