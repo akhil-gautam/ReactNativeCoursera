@@ -5,6 +5,7 @@ import { ABOUT } from '../shared/textData';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { Loading } from './LoadingComponent';
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = (state) => {
   return {
@@ -27,25 +28,29 @@ const Leaders = (props) => {
   };
 
   return(
-    <Card title='Corporate Leadership'>
-      <FlatList
-        data={props.leaders}
-        renderItem={renderLeaders}
-        keyExtractor={item => item.id.toString()}
-      />
-    </Card>
+    <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+      <Card title='Corporate Leadership'>
+        <FlatList
+          data={props.leaders}
+          renderItem={renderLeaders}
+          keyExtractor={item => item.id.toString()}
+        />
+      </Card>
+    </Animatable.View>
   );
 };
 
 const History = () => {
   return(
     <View>
-      <Card title="Our History">
+      <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+        <Card title="Our History">
           <View>
             <Text>{ABOUT.firstPart}</Text>
             <Text style={{paddingTop: 10}}>{ABOUT.secondPart}</Text>
           </View>
         </Card>
+      </Animatable.View>
     </View>
   );
 }

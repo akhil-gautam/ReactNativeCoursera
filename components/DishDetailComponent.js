@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavourite } from '../redux/ActionCreator';
 import AddCommentForm from '../forms/addComments';
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = (state) => {
   return {
@@ -24,32 +25,34 @@ const RenderDish = (props) => {
 
   return(
     dish != null?
-    <Card
-      featuredTitle={dish.name}
-      image={{ uri: baseUrl + dish.image }}
-    >
-      <Text>
-        {dish.description}
-      </Text>
-      <View style={{display: 'flex', flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
-        <Icon
-          raised
-          reverse
-          name={ props.favourite ? 'heart' : 'heart-o' }
-          type='font-awesome'
-          color='#f50'
-          onPress={() => props.favourite ? console.log('We already know this.') : props.onPress()}
-        />
-        <Icon
-          raised
-          reverse
-          name='pencil'
-          type='font-awesome'
-          color='#0000ff'
-          onPress={() => props.openCommentForm()}
-        />
-      </View>
-    </Card>
+    <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+      <Card
+        featuredTitle={dish.name}
+        image={{ uri: baseUrl + dish.image }}
+      >
+        <Text>
+          {dish.description}
+        </Text>
+        <View style={{display: 'flex', flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+          <Icon
+            raised
+            reverse
+            name={ props.favourite ? 'heart' : 'heart-o' }
+            type='font-awesome'
+            color='#f50'
+            onPress={() => props.favourite ? console.log('We already know this.') : props.onPress()}
+          />
+          <Icon
+            raised
+            reverse
+            name='pencil'
+            type='font-awesome'
+            color='#0000ff'
+            onPress={() => props.openCommentForm()}
+          />
+        </View>
+      </Card>
+    </Animatable.View>
     :
     <View></View>
   );
@@ -74,13 +77,15 @@ const RenderComments = (props) => {
     )
   }
   return(
-    <Card title='Comments'>
-      <FlatList
-        data={comments}
-        renderItem={renderCommentItem}
-        keyExtractor={item => item.id.toString()}
-      />
-    </Card>
+    <Animatable.View animation="fadeInUp" duration={2000} delay={1000}>
+      <Card title='Comments'>
+        <FlatList
+          data={comments}
+          renderItem={renderCommentItem}
+          keyExtractor={item => item.id.toString()}
+        />
+      </Card>
+    </Animatable.View>
   );
 
 }
